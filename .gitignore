@@ -1,9 +1,0 @@
-# Build folder and log file
-build/
-build.log
-.gitattributes
-.gitignore
-.vscode
-*.exe
-*.json
-.obsidian
