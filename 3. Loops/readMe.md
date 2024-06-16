@@ -185,3 +185,253 @@ Notice that for each `student` in the `students` list, it will print the stu
 
 - You can learn more in Python’s documentation of [lists](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists).
 
+# Length
+
+We can utilize `len` as a way of checking the length of the `list` called `students`.
+- Imagine that you don’t simply want to print the name of the student but also their position in the list. To accomplish this, you can edit your code as follows:
+
+```
+students = ["Hermoine", "Harry", "Ron"]
+
+for i in range(len(students)):
+	print(i + 1, students[i])
+```
+
+Notice how executing this code results in not only getting the position of each student plus one using `i + 1`, but also prints the name of each student. `len` allows you to dynamically see how long the list of the students is regardless of how much it grows.
+
+- You can learn more in Python’s documentation of [len](https://docs.python.org/3/library/functions.html?highlight=len#len).
+
+# Dictionaries / dicts
+- `dict`s or dictionaries is a data structure that allows you to associate keys with values.
+- Where a `list` is a list of multiple values, a `dict` associates a key with a value.
+- Considering the houses of Hogwarts, we might assign specific students to specific houses.
+![[Pasted image 20240616211416.png]]
+
+- We could use `list`s alone to accomplish this:
+
+```python
+students = ["Hermoine", "Harry", "Ron", "Draco"]
+houses = ["Gryffindor", "Gryffindor", "Griffindor", "Slytherin"]
+```
+
+Notice that we can promise that we will always keep these lists in order. The individual at the first position of `students` is associated with the house at the first position of the `houses` list, and so on. However, this can become quite cumbersome as our lists grow!
+
+- We can better our code using a `dict` as follows:
+
+```python
+students = {
+	"Hermoine": "Gryffindor",
+	"Harry": "Gryffindor",
+	"Ron": "Gryffindor",
+	"Draco": "Slytherin",
+}
+print(students["Hermoine"])
+print(students["Harry"])
+print(students["Ron"])
+print(students["Draco"])
+```
+
+Notice how we use `{}` curly braces to create a dictionary. Where `list`s use numbers to iterate through the list, `dict`s allow us to use words.
+
+```output
+Gryffindor
+Gryffindor
+Gryffindor
+Slytherin
+```
+
+- We can improve our code as follows:
+
+```python
+students = {
+	"Hermoine": "Gryffindor",
+	"Harry": "Gryffindor",
+	"Ron": "Gryffindor",
+	"Draco": "Slytherin",
+}
+for student in students:
+	print(student)
+```
+
+Notice how, executing this code, the for loop will only iterate through all the keys, resulting in a list of the names of the students. How could we print out both values and keys?
+
+- Modify your code as follows:
+
+```python
+students = {
+	"Hermoine": "Gryffindor",
+	"Harry": "Gryffindor",
+	"Ron": "Gryffindor",
+	"Draco": "Slytherin",
+}
+for student in students:
+	print(student, students[student])
+```
+
+Notice how `students[student]` will go to each student’s key and find the value of their house. Execute your code, and you’ll notice how the output is a bit messy.
+
+- We can clean up the print function by improving our code as follows:
+
+```python
+students = {
+	"Hermoine": "Gryffindor",
+	"Harry": "Gryffindor",
+	"Ron": "Gryffindor",
+	"Draco": "Slytherin",
+}
+for student in students:
+	print(student, students[student], sep=", ")
+```
+
+Notice how this creates a clean separation of a `,` between each item printed.
+
+- If you execute `python hogwarts.py`, you should see the following:
+
+```output
+$ python hogwarts.py
+Hermoine, Gryffindor
+Harry, Gryffindor
+Ron, Gryffindor
+Draco, Slytherin
+```
+
+- What if we have more information about our students? How could we associate more data with each of the students?
+![[Pasted image 20240616211810.png]]
+
+You can imagine wanting to have lots of data associated with multiple keys. Enhance your code as follows:
+
+```python
+students = [
+	{"name": "Hermoine", "house": "Gryffindor", "patronus": "Otter"},
+	{"name": "Harry", "house": "Gryffindor", "patronus": "Stag"},
+	{"name": "Ron", "house": "Gryffindor", "patronus": "Jack Russell terrier"},
+	{"name": "Draco", "house": "Slytherin", "patronus": None},
+]
+```
+
+Notice how this code creates a `list` of `dict`s. The `list` called `students` has four `dicts` within it: One for each student. Also, notice that Python has a special `None` designation where there is no value associated with a key.
+
+- Now, you have access to a whole host of interesting data about these students. Now, further modify your code as follows:
+
+```python
+students = [
+	{"name": "Hermoine", "house": "Gryffindor", "patronus": "Otter"},
+	{"name": "Harry", "house": "Gryffindor", "patronus": "Stag"},
+	{"name": "Ron", "house": "Gryffindor", "patronus": "Jack Russell terrier"},
+	{"name": "Draco", "house": "Slytherin", "patronus": None},
+]
+
+for student in students:
+	print(student["name"], student["house"], student["patronus"], sep=", ")
+```
+
+Notice how the `for` loop will iterate through each of the `dict`s inside the `list` called `students`.
+
+- You can learn more in Python’s Documentation of [`dict`s](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
+
+Remember that the classic game Mario has a hero jumping over bricks. Let’s create a textual representation of this game.
+
+![Mario Block.](https://cs50.harvard.edu/python/2022/notes/2/cs50pWeek2Slide21.png "Mario Block.")
+
+- Begin coding as follows:
+
+```python
+print("#")
+print("#")
+print("#")
+```
+
+Notice how we are copying and pasting the same code over and over again.
+
+- Consider how we could better the code as follows:
+
+```python
+for _ in range(3):
+	print("#")
+```
+
+Notice how this accomplishes essentially what we want to create.
+
+- Consider: Could we further abstract for solving more sophisticated problems later with this code? Modify your code as follows:
+
+```python
+def main():
+	print_column(3)
+
+
+def print_column(height):
+	for _ in range(height):
+		print("#")
+
+
+main()
+```
+
+Notice how our column can grow as much as we want without any hard coding.
+
+- Now, let’s try to print a row horizontally. Modify your code as follows:
+
+```python
+def main():
+	print_row(4)
+
+
+def print_row(width):
+	print("?" * width)
+
+
+main()
+```
+
+Notice how we now have code that can create left-to-right blocks.
+
+- Examining the slide below, notice how Mario has both rows and columns of blocks.
+
+![Mario Underground.](https://cs50.harvard.edu/python/2022/notes/2/cs50pWeek2Slide24.png "Mario Underground.")
+
+- Consider: How could we implement both rows and columns within our code? Modify your code as follows:
+
+```python
+def main():
+	print_square(3)
+
+
+def print_square(size):
+
+	# For each row in square
+	for i in range(size):
+
+		# For each brick in row
+		for j in range(size):
+
+			#  Print brick
+			print("#", end="")
+
+		# Print blank line
+		print()
+
+
+main()
+```
+
+Notice that we have an outer loop that addresses each row in the square. Then, we have an inner loop that prints a brick in each row. Finally, we have a `print` statement that prints a blank line.
+
+- We can further abstract away our code:
+
+```python
+def main():
+	print_square(3)
+
+
+def print_square(size):
+	for i in range(size):
+		print_row(size)
+
+
+def print_row(width):
+	print("#" * width)
+
+
+main()
+```
+
