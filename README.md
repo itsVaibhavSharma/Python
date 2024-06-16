@@ -290,7 +290,7 @@ if not char.isalpha():
 
 The `pass` keyword can be used as a placeholder for future code. It does not have any effect in your code but it can save you from errors you would get in case of incomplete code:
 
-```py
+```python
 def foo():
     pass
 ```
@@ -300,3 +300,55 @@ In Python, there's a way to easily format strings. _f-strings_ enable you to i
 Interpolation means writing placeholders that will be replaced by the specified values when the program runs. For example, you can get the same result of `'Encrypted text: ' + text` with `f'Encrypted text: {text}'`. You need to put an `f` before the quotes to create the f-string and write the variables or expressions you want to interpolate between curly braces.
 
 The newline character `\n` is a special sequence used to represent a new line. You can write a backslash `\` followed by an `n` as a normal sequence of characters in a string and it will be replaced by a new line in the output when the program runs.
+
+### str class
+Python comes with built-in classes that can help us with string manipulation. One of them is the `str` class. It has a method called `maketrans` that can help us create a translation table. This table can be used to replace characters in a string:
+
+```python
+str.maketrans({'t': 'c', 'l': 'b'})
+```
+
+The above, when called on a string, will replace all `t` characters with `c` and all `l` characters with `b`.
+
+Defining the translation does not in itself translate the string. The `translate` method must be called on the string to be translated with the translation table as an argument:
+
+```python
+my_string = "tamperlot"
+translation_table = str.maketrans({'t': 'c', 'l': 'b'})
+translated_string = my_string.translate(translation_table)
+```
+
+You have accessed elements (characters) of a string before, using the index operator `[]`. You can also use the index operator to access a range of characters in a string with `string[x:y:h]`:
+
+Example Code
+
+```python
+my_string = 'camperbot'
+camper = my_string[0:6]
+cp = my_string[0:6:3]
+```
+
+Where `x` is the starting index, `y` is the ending index, and `h` is the step (the amount of characters to skip over).
+Just as the step is optional, a start at `0` and an end at the end of the slice are optional:
+
+Example Code
+
+```python
+my_string = 'camperbot'
+camperbot = my_string[::]
+```
+
+### Converting string to int
+```python
+my_string = '123'
+my_int = int(my_string)
+```
+
+### // and % operator
+```python
+my_number = 12
+first_digit = my_number // 10
+second_digit = my_number % 10
+```
+
+Integer division results in the quotient of the division, rounded down to the nearest integer.

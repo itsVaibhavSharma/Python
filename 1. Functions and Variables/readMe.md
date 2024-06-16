@@ -291,3 +291,208 @@ print(x + y)
 ```
 
 This illustrates that you can run functions on functions. The inner function is run first, and then the outer one is run. First, the `input` function is run. Then, the `int` function.
+
+# Float 
+-   
+A floating point value is a real number that has a decimal point in it, such as `0.52`.
+- You can change your code to support floats as follows:
+
+```python
+x = float(input("What's x? "))
+y = float(input("What's y? "))
+
+print(x + y)
+```
+
+This change allows your user to enter `1.2` and `3.4` to present a total of `4.6`.
+
+- Let’s imagine, however, that you want to round the total to the nearest integer. Looking at the Python documentation for `round`, you’ll see that the available arguments are `round(number[n, ndigits])`. Those square brackets indicate that something optional can be specified by the programmer. Therefore, you could do `round(n)` to round a digit to its nearest integer. Alternatively, you could code as follows:
+
+```python
+# Get the user's input
+x = float(input("What's x? "))
+y = float(input("What's y? "))
+
+# Create a rounded result
+z = round(x + y)
+
+# Print the result
+print(z)
+```
+
+The output will be rounded to the nearest integer.
+
+- What if we wanted to format the output of long numbers? For example, rather than seeing `1000`, you may wish to see `1,000`. You could modify your code as follows:
+
+```python
+# Get the user's input
+x = float(input("What's x? "))
+y = float(input("What's y? "))
+
+# Create a rounded result
+z = round(x + y)
+
+# Print the formatted result
+print(f"{z:,}")
+```
+
+Though quite cryptic, that `print(f"{z:,}")` creates a scenario where the outputted `z` will include commas where the result could look like `1,000` or `2,500`.
+
+- How can we round floating point values? First, modify your code as follows:
+
+```python
+# Get the user's input
+x = float(input("What's x? "))
+y = float(input("What's y? "))
+
+# Calculate the result
+z = x / y
+
+# Print the result
+print(z)
+```
+
+When inputting `2` as x and `3` as y, the result z is `0.6666666666`, seemingly going on to infinite as we might expect.
+
+- Let’s imagine that we want to round this down. We could modify our code as follows:
+
+```python
+# Get the user's input
+x = float(input("What's x? "))
+y = float(input("What's y? "))
+
+# Calculate the result and round
+z = round(x / y, 2)
+
+# Print the result
+print(z)
+```
+`Output: 0.67`
+
+As we might expect, this will round the result to the nearest two decimal points.
+
+- We could also use `fstring` to format the output as follows:
+
+```python
+# Get the user's input
+x = float(input("What's x? "))
+y = float(input("What's y? "))
+
+# Calculate the result
+z = x / y
+
+# Print the result
+print(f"{z:.2f}")
+```
+
+This cryptic `fstring` code displays the same as our prior rounding strategy.
+
+- You can learn more in Python’s documentation of [`float`](https://docs.python.org/3/library/functions.html?highlight=float#float).
+
+# Own Functions / def
+- We can create our own function called `hello` as follows:
+
+```python
+def hello():
+	print("hello")
+
+
+name = input("What's your name? ")
+hello()
+print(name)
+```
+
+Notice that everything under `def hello()` is indented. Python is an indented language. It uses indentation to understand what is part of the above function. Therefore, everything in the `hello` function must be indented. When something is not indented, it treats it as if it is not inside the `hello` function. Running `python hello.py` in the terminal window, you’ll see that your output is not exactly as you may want.
+
+- We can further improve our code:
+
+```python
+# Create our own function
+def hello(to):
+	print("hello,", to)
+
+
+# Output using our own function
+name = input("What's your name? ")
+hello(name)
+```
+
+Here, in the first lines, you are creating your `hello` function. This time, however, you are telling the compiler that this function takes a single parameter: a variable called `to`. Therefore, when you call `hello(name)` the computer passes `name` into the `hello` function as `to`. This is how we pass values into functions.
+
+- We can change our code to add a default value to `hello`:
+
+```python
+# Create our own function
+def hello(to="world"):
+	print("hello,", to)
+
+
+# Output using our own function
+name = input("What's your name? ")
+hello(name)
+
+# Output without passing the expected arguments
+hello()
+```
+
+Test out your code yourself. Notice how the first `hello` will behave as you might expect, and the second hello, which is not passed a value, will, by default, output `hello, world`.
+
+- We don’t have to have our function at the start of our program. We can move it down, but we need to tell the compiler that we have a `main` function and a separate `hello` function.
+
+```python
+def main():
+
+	# Output using our own function
+	name = input("What's your name? ")
+	hello(name)
+
+	# Output without passing the expected arguments
+	hello()
+
+
+# Create our own function
+def hello(to="world"):
+	print("hello,", to)
+```
+
+This alone, however, will create an error of sorts. If we run `python hello.py`, nothing happens! The reason for this is that nothing in this code is actually calling the `main` function and bringing our program to life.
+
+- The following very small modification will call the `main` function and restore our program to working order:
+
+```python
+def main():
+
+	# Output using our own function
+	name = input("What's your name? ")
+	hello(name)
+
+	# Output without passing the expected arguments
+	hello()
+
+
+# Create our own function
+def hello(to="world"):
+	print("hello,", to)
+
+
+main()
+```
+
+### Returning values
+- You can imagine many scenarios where you don’t just want a function to perform an action but also to return a value back to the main function. For example, rather than simply printing the calculation of `x + y`, you may want a function to return the value of this calculation back to another part of your program. This “passing back” of a value we call a `return` value.
+- Returning to our `calculator.py` code by typing `code calculator.py`. Erase all code there. Rework the code as follows:
+
+```python
+def main():
+	x = int(input("What's x? "))
+	print("x squared is", square(x))
+
+
+def square(n):
+	return n * n
+
+
+main()
+```
+
+Effectively, `x` is passed to `square`. Then, the calculation of `x * x` is returned back to the main function
