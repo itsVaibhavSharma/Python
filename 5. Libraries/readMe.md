@@ -281,7 +281,6 @@ Notice that this code in and of itself does not do anything for the user. Howeve
 
 ```python
 import sys
-
 from sayings import goodbye
 
 if len(sys.argv) == 2:

@@ -352,3 +352,99 @@ second_digit = my_number % 10
 ```
 
 Integer division results in the quotient of the division, rounded down to the nearest integer.
+
+# Lists
+A list in Python is a built-in data type that allows you to store many items in a single data structure. In Python, you create a list by putting items inside square brackets (`[]`), with each item separated from the following one by a comma.
+
+```python
+numbers = [1, 2, 3, 4]
+```
+
+You want to be able to add items at the end of your list. For that you'll use the `.append()` list method.
+
+```python
+my_list = [2, 4, 7]
+my_list.append(3)
+```
+
+In the example above, after appending `3`, `my_list` would be `[2, 4, 7, 3]`.
+
+# Dictionary
+A dictionary is another built-in data type in Python. A dictionary is a collection of data in the form of _key_-_value_ pairs. Dictionaries are defined with curly braces (`{}`) and they contain key-value pairs separated by commas. Each key is followed by a colon (`:`) and the value:
+
+```python
+{'amount': 50.0, 'category': 'Food'}
+```
+
+In the example above, `'amount'` and `'category'` are keys, and `50.0` and `'Food'` are their corresponding values.
+
+In Python, an important thing to know is that the same type of quote used to define a string cannot be used inside it. For example, the string `'I'm a string!'` is not valid. To use the single quote inside that string you should either:
+
+- Escape the quote by prepending a backlash to it: `'I\'m a string!'`
+- Or use double quotes to define the string: `"I'm a string!"` (preferred).
+
+You can access values in a dictionary through its keys. You need to use bracket notation and include the key between the square brackets:
+
+```python
+my_dict = {'amount': 50.0, 'category': 'Food'}
+my_dict['amount'] # 50.0
+```
+
+# Lambda Functions
+Lambda functions are brief, anonymous functions in Python, ideal for simple, one-time tasks. They are defined by the `lambda` keyword, and they use the following syntax:
+
+```python
+lambda x: expr
+```
+
+In the example above, `x` represents a parameter to be used in the expression `expr`, and it acts just like any parameter in a traditional function. `expr` is the expression that gets evaluated and returned when the lambda function is called.
+
+Create a variable named `test` and assign it a lambda function that takes an `x` parameter and returns `x * 2`.
+
+```python
+test = lambda x: x * 2
+```
+
+To call a lambda function you can use the usual function syntax with a pair of parentheses after the variable name.
+
+Call your `test` lambda function and pass `3` as the argument. Then, print the result.
+
+```python
+test = lambda x: x * 2
+print(test(3))
+```
+
+Lambda functions can be valuably combined with the `map()` function, which executes a specified function for each element in a collection of objects, such as a list:
+
+```python
+map(lambda x: x * 2, [1, 2, 3])
+```
+
+The function to execute is passed as the first argument, and the iterable is passed as the second argument.
+
+The result of the example above would be `[2, 4, 6]`, where each item in the list passed to `map()` has been doubled by the action of the lambda function.
+
+Modify your `print()` call to print the result of calling `map()` with `test` as the first argument, and `[2, 3, 5, 8]` as the second argument. You won't be able to see a readable output yet.
+
+```python
+test = lambda x: x * 2
+print(map(test, [2, 3, 5, 8]))
+```
+
+You should see something like `<map object at 0xd273a8>` printed on the console, which is the string representation of the map object returned by `map()`.
+
+To obtain a readable output you need to turn the map object into a list. Do it by passing the `map()` call as the argument to the `list()` function.
+
+```python
+test = lambda x: x * 2
+print(list(map(test, [2, 3, 5, 8])))
+```
+
+The `sum()` function returns the sum of the items in the iterable which is passed as its argument. You are going to use `sum()` together with `map()` and `lambda` functions to get the total amount of expenses.
+
+For now, make a little test and modify your current `print()` call replacing the `list()` call with a call to the `sum()` function passing it the current `map()` call as the argument.
+
+```python
+test = lambda x: x * 2
+print(sum(map(test, [2,3,5,8])))
+```

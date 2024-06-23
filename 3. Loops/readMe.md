@@ -190,7 +190,7 @@ Notice that for each `student` in the `students` list, it will print the stu
 We can utilize `len` as a way of checking the length of the `list` called `students`.
 - Imagine that you don’t simply want to print the name of the student but also their position in the list. To accomplish this, you can edit your code as follows:
 
-```
+```python
 students = ["Hermoine", "Harry", "Ron"]
 
 for i in range(len(students)):
